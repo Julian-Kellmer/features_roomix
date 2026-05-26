@@ -22,40 +22,6 @@ const popularSearches = [
   { title: 'Propiedades nuevas', subtitle: 'A estrenar y en construcción' },
 ]
 
-const alternativeProperties = [
-  {
-    id: 1,
-    title: 'Departamento en Colegiales',
-    details: '2 amb · 52 m² · Piso 3',
-    price: 'USD 1.100/mes',
-    tag: 'Nuevo',
-    color: '#7c3aed',
-  },
-  {
-    id: 2,
-    title: 'Departamento en Belgrano',
-    details: '2 amb · 58 m² · Piso 6',
-    price: 'USD 1.250/mes',
-    tag: null,
-    color: '#0ea5e9',
-  },
-  {
-    id: 3,
-    title: 'Departamento en Chacarita',
-    details: '2 amb · 48 m² · PB',
-    price: 'USD 980/mes',
-    tag: 'Destacado',
-    color: '#10b981',
-  },
-  {
-    id: 4,
-    title: 'Departamento en Palermo',
-    details: '2 amb · 64 m² · Piso 8',
-    price: 'USD 1.390/mes',
-    tag: null,
-    color: '#f59e0b',
-  },
-]
 
 function RoomixIcon() {
   return (

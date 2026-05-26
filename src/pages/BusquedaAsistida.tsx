@@ -159,7 +159,7 @@ export default function BusquedaAsistida() {
   function canAdvance(): boolean {
     if (isProfile) return true
     if (!current) return false
-    if (current.type === 'single') return !!(answers as Record<string, unknown>)[current.id]
+    if (current.type === 'single') return !!(answers as unknown as Record<string, unknown>)[current.id]
     if (current.id === 'prioridades') return answers.prioridades.length > 0
     return true
   }
@@ -236,7 +236,7 @@ export default function BusquedaAsistida() {
               {current.type === 'single' && (
                 <div ref={step === 0 ? cardGridRef : undefined} className={s.cardGrid}>
                   {current.options.map(opt => {
-                    const selected = (answers as Record<string, unknown>)[current.id] === opt.value
+                    const selected = (answers as unknown as Record<string, unknown>)[current.id] === opt.value
                     return (
                       <button
                         key={opt.value}
