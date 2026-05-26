@@ -126,10 +126,12 @@ export default function BusquedaAsistida() {
   const navigate = useNavigate()
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState<Answers>({
-    trabajo: '', ubicacionTrabajo: '', lifestyle: '', entorno: [], prioridades: [],
+    trabajo: 'oficina', ubicacionTrabajo: '', lifestyle: '', entorno: [], prioridades: [],
   })
   const [showTutorial, setShowTutorial] = useState(false)
   const cardGridRef = useRef<HTMLDivElement>(null)
+  const oficinaBtnRef = useRef<HTMLButtonElement>(null)
+  const locationWrapRef = useRef<HTMLDivElement>(null)
   const bottomBarRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => { setShowTutorial(true) }, [])
@@ -137,18 +139,36 @@ export default function BusquedaAsistida() {
   const tutorialSteps: TutorialStep[] = [
     {
       title: 'Feature 2 — Búsqueda asistida',
-      desc: 'Para usuarios que no saben qué quieren. Los guiamos con preguntas simples para entender su estilo de vida y necesidades reales.',
+      desc: 'Para usuarios que no saben qué quieren. Los guiamos con preguntas simples sobre su estilo de vida — sin filtros técnicos ni jerga inmobiliaria.',
     },
     {
       target: cardGridRef,
-      title: 'Sin filtros técnicos, solo opciones simples',
-      desc: 'Cada pregunta tiene opciones visuales con emoji. Sin texto libre, sin jerga inmobiliaria — cualquier usuario puede responderlas.',
+      title: 'Sin tecnicismos, solo opciones simples',
+      desc: 'El usuario no elige filtros — elige cómo vive. Cada opción tiene emoji y descripción corta. Cualquiera puede responder sin saber de inmobiliaria.',
+      side: 'below',
+    },
+    {
+      target: oficinaBtnRef,
+      title: 'Elegí "Voy a la oficina"',
+      desc: 'Cuando el usuario va presencialmente a trabajar, le pedimos la dirección de su oficina. Eso nos da el destino real de commute para hacer recomendaciones precisas.',
+      side: 'below',
+    },
+    {
+      target: locationWrapRef,
+      title: 'Esta dirección es el Punto B',
+      desc: 'Lo que ingresá acá se convierte en el destino de commute en el mapa de resultados. Desde ahí calculamos qué tan cerca está cada propiedad.',
+      side: 'below',
+    },
+    {
+      target: locationWrapRef,
+      title: 'Plan: Google Travel API',
+      desc: 'En producción, con esta dirección se consulta la API de Google Travel para obtener opciones reales de transporte público — subte, colectivo y tiempo estimado en hora pico.',
       side: 'below',
     },
     {
       target: bottomBarRef,
       title: 'Perfil personalizado al final',
-      desc: 'Con las respuestas armamos un perfil del usuario y lo llevamos directo a las propiedades que mejor le encajan.',
+      desc: 'Con todas las respuestas armamos un perfil del usuario y lo llevamos directo a las propiedades que mejor le encajan.',
       side: 'above',
     },
   ]
@@ -240,6 +260,7 @@ export default function BusquedaAsistida() {
                     return (
                       <button
                         key={opt.value}
+                        ref={current.id === 'trabajo' && opt.value === 'oficina' ? oficinaBtnRef : undefined}
                         className={`${s.optCard} ${selected ? s.optSelected : ''}`}
                         onClick={() => setAnswers(a => ({ ...a, [current.id]: opt.value }))}
                       >
@@ -254,7 +275,7 @@ export default function BusquedaAsistida() {
 
               {/* Dirección del trabajo (híbrido u oficina) */}
               {current.id === 'trabajo' && (answers.trabajo === 'oficina' || answers.trabajo === 'hibrido') && (
-                <div className={s.locationWrap}>
+                <div ref={locationWrapRef} className={s.locationWrap}>
                   <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
                     <circle cx="8" cy="6.5" r="2.5" stroke="rgba(168,85,247,0.7)" strokeWidth="1.4" />
                     <path d="M8 2C5.24 2 3 4.24 3 7C3 10.5 8 14 8 14C8 14 13 10.5 13 7C13 4.24 10.76 2 8 2Z" stroke="rgba(168,85,247,0.7)" strokeWidth="1.4" />
