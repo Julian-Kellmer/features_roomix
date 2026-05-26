@@ -1,0 +1,168 @@
+/* Bloquea interacción con la app */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: transparent;
+}
+
+/* Spotlight: box-shadow crea el efecto de oscurecimiento alrededor */
+.spotlight {
+  position: fixed;
+  z-index: 9001;
+  border-radius: 12px;
+  pointer-events: none;
+  box-shadow: 0 0 0 100vmax rgba(13, 11, 24, 0.85);
+  outline: 2px solid rgba(168, 85, 247, 0.45);
+  transition:
+    top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tooltip flotante junto al elemento */
+.tooltip {
+  position: fixed;
+  z-index: 9002;
+  background: #16122a;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(168, 85, 247, 0.1);
+  animation: fadeUp 0.25s ease;
+}
+
+/* Pantalla de bienvenida centrada */
+.welcomeWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 9001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.card {
+  background: #16122a;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  border-radius: 20px;
+  padding: 40px 36px;
+  max-width: 400px;
+  width: calc(100% - 32px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  pointer-events: all;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(168, 85, 247, 0.1);
+  animation: fadeScale 0.3s ease;
+}
+
+.welcomeEmoji {
+  font-size: 36px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+}
+
+.stepLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(168, 85, 247, 0.7);
+}
+
+.cardDesc {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.55;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.skipBtn {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+.skipBtn:hover {
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nextBtn {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  background: #7c3aed;
+  border-radius: 10px;
+  padding: 9px 18px;
+  transition: background 0.15s;
+  margin-left: auto;
+}
+.nextBtn:hover {
+  background: #6d28d9;
+}
+
+/* Progress dots */
+.dots {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9002;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.dotActive {
+  background: #a855f7;
+  transform: scale(1.4);
+}
+
+.dotDone {
+  background: rgba(168, 85, 247, 0.45);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeScale {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
